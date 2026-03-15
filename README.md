@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="th" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -25,7 +26,7 @@
 <body class="antialiased">
 
     <nav class="fixed top-0 w-full bg-white shadow-sm z-50 border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="w-full mx-auto px-4 sm:px-8 lg:px-16 xl:px-24">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
                     <span class="text-2xl mr-2">🩺</span>
@@ -42,7 +43,7 @@
         </div>
     </nav>
 
-    <main class="pt-20 pb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
+    <main class="pt-20 pb-16 w-full mx-auto px-4 sm:px-8 lg:px-16 xl:px-24 space-y-24">
 
         <section id="mindset" class="pt-8">
             <div class="text-center max-w-3xl mx-auto mb-12">
@@ -237,7 +238,7 @@
                 <p class="text-slate-600">มีข้อสงสัยเพิ่มเติม? หรือต้องการให้ AI ช่วยวิเคราะห์ข้อความสัญญาจ้างว่าเข้าข่ายเงินได้ประเภทใด? พิมพ์ข้อความด้านล่างได้เลยครับ</p>
             </div>
 
-            <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl shadow-xl border border-slate-700 p-6 md:p-8 max-w-4xl mx-auto text-white relative overflow-hidden">
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl shadow-xl border border-slate-700 p-6 md:p-8 w-full lg:w-4/5 xl:max-w-6xl mx-auto text-white relative overflow-hidden">
                 <div class="absolute -top-10 -right-10 opacity-10 text-9xl transform rotate-12">🤖</div>
                 
                 <div class="relative z-10">
