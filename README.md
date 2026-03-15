@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="th" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -474,7 +473,7 @@
         }
 
         // --- ระบบ AI ด้วย Gemini API ---
-        const apiKey = ""; // API Key จาก Environment
+        const apiKey = "AIzaSyBAU13Cr-5PZlky5pBL3ADs4vUHy7BABys"; // API Key จาก Environment
 
         async function fetchWithRetry(url, options, retries = 5) {
             const delays = [1000, 2000, 4000, 8000, 16000];
