@@ -948,7 +948,6 @@ const topic6Expanded = [
     { id: 'sex_tox_49', topicId: 'sex_tox', text: "In a fatal suspected opioid overdose, an autopsy reveals 'foam cones' at the mouth and nose. This is caused by:", options: ["Epilepsy", "Severe non-cardiogenic pulmonary edema", "Gastric acid reflux", "Bacterial gas"], correct: 1, explanation: "Opioids cause profound respiratory depression leading to hypoxia, which damages pulmonary capillaries, resulting in massive fluid leakage (pulmonary edema) that whips into foam." },
     { id: 'sex_tox_50', topicId: 'sex_tox', text: "An examination of the hymen reveals a transecting tear extending to the base. This finding:", options: ["Definitively proves rape", "Indicates penetration occurred, but cannot alone differentiate between consensual sex, trauma, or assault", "Proves virginity prior to the incident", "Is a normal anatomical variant"], correct: 1, explanation: "Hymenal tears indicate blunt trauma or penetration, but medical findings alone cannot establish the legal issue of consent." }
 ];
-    ];
 
         // --- APP STATE & PERSISTENCE ---
         const DEFAULT_STATE = {
@@ -1401,8 +1400,9 @@ const topic6Expanded = [
         // Boot
         window.addEventListener('DOMContentLoaded', () => {
             app.init();
-        });
+        };
 
+        window.addEventListener('load', () => app.init());
     </script>
 </body>
 </html>
