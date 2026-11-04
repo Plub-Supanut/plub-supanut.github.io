@@ -5,138 +5,203 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="color-scheme" content="light dark" />
 <title>Plub</title>
-<meta name="description" content="รวมลิงก์ที่ใช้บ่อยและ repo ของ Plub" />
-<meta name="theme-color" content="#f6f2ea" media="(prefers-color-scheme: light)" />
-<meta name="theme-color" content="#14171a" media="(prefers-color-scheme: dark)" />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232f5d4a'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' fill='%23f6f2ea' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E" />
+<meta name="description" content="รวมลิงก์ที่ใช้บ่อยและ repo ล่าสุดของ Plub" />
+<meta name="theme-color" content="#F8F5EE" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#101316" media="(prefers-color-scheme: dark)" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%238B1E31'/%3E%3Cpath d='M12 34h10l4-12 8 22 4-10h14' fill='none' stroke='%23F8F5EE' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=Noto+Serif+Thai:wght@500;600;700&display=swap" rel="stylesheet" />
 <style>
 :root{
-  --bg:#f6f2ea; --paper:#fffdf8; --ink:#1b1f1c; --muted:#5f665f; --faint:#8a9088;
-  --line:#ddd6c9; --line-2:#c9c1b1; --green:#2f5d4a; --green-soft:#e8efe9;
+  --paper:#F8F5EE; --paper-2:#F1ECE3; --card:#FFFDF9; --ink:#101419; --body:#2B323A; --muted:#59636F; --faint:#7A828C;
+  --line:rgba(16,20,25,.12); --line-2:rgba(16,20,25,.22); --crimson:#8B1E31; --crimson-deep:#6D1224; --gold:#806124; --gold-2:#C9A961;
   --sans:"IBM Plex Sans Thai","Noto Sans Thai","Leelawadee UI",system-ui,sans-serif;
-  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  --serif:"Noto Serif Thai","Iowan Old Style",Georgia,serif;
+  --shadow:0 24px 60px -38px rgba(16,20,25,.35),0 2px 8px rgba(16,20,25,.05);
 }
 @media (prefers-color-scheme: dark){
-  :root{ --bg:#14171a; --paper:#1b1f22; --ink:#ece7dd; --muted:#a7ada6; --faint:#7e857e;
-         --line:#2c3236; --line-2:#3b4348; --green:#8fc3a7; --green-soft:#22302a; }
+  :root{ --paper:#101316; --paper-2:#161B20; --card:#171D23; --ink:#F3EFE6; --body:#D7D2C6; --muted:#A6AEA9; --faint:#828C86;
+         --line:rgba(243,239,230,.13); --line-2:rgba(243,239,230,.24); --crimson:#D4556B; --crimson-deep:#E07084; --gold:#C9A961; --gold-2:#E2C88F; }
 }
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--body);font-family:var(--sans);font-size:16px;line-height:1.65;text-rendering:optimizeLegibility}
 a{color:inherit}
-.wrap{width:min(720px,calc(100% - 40px));margin:0 auto}
-header{padding:34px 0 8px}
-.top{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
-.brand{font-family:var(--mono);font-weight:500;font-size:15px;letter-spacing:.02em;text-decoration:none}
-.brand span{color:var(--green)}
-.top nav{display:flex;gap:14px;font-size:13px}
-.top nav a{color:var(--muted);text-decoration:none}
-.top nav a:hover{color:var(--ink)}
-main{padding:28px 0 0}
-h1{font-size:clamp(1.7rem,4.4vw,2.3rem);line-height:1.25;font-weight:500;letter-spacing:-.01em;margin:0 0 8px}
-.lede{color:var(--muted);margin:0 0 34px;max-width:52ch;font-size:15px}
-h2{font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin:0 0 10px}
-section{margin-bottom:34px}
+.wrap{width:min(980px,calc(100% - 44px));margin:0 auto}
+.skip{position:absolute;left:-999px;top:8px;background:var(--card);color:var(--ink);padding:10px 14px;border-radius:10px}
+.skip:focus{left:16px}
+header{padding:22px 0 4px}
+.top{display:flex;align-items:center;gap:18px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-weight:600;letter-spacing:.01em}
+.brand svg{width:26px;height:26px;color:var(--crimson)}
+.brand small{display:block;font-weight:400;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.nav{margin-left:auto;display:flex;gap:2px;align-items:center}
+.nav a{text-decoration:none;color:var(--muted);font-size:13.5px;padding:7px 11px;border-radius:999px}
+.nav a:hover{color:var(--ink);background:var(--paper-2)}
+.nav a.gh{color:var(--crimson);border:1px solid var(--line-2);font-weight:500}
+@media(max-width:680px){.nav a:not(.gh){display:none}}
+.hero{padding:62px 0 30px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr);gap:46px;align-items:center}
+@media(max-width:900px){.hero{grid-template-columns:1fr;gap:30px;padding-top:44px}}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--crimson);font-weight:600;margin-bottom:14px}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--crimson);opacity:.55}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.5rem,6vw,4.1rem);line-height:1.1;letter-spacing:-.02em;color:var(--ink);margin:0 0 14px}
+h1 em{font-style:normal;color:var(--crimson)}
+.lede{max-width:46ch;font-size:16px;color:var(--body);margin:0 0 20px}
+.lede strong{color:var(--ink);font-weight:600}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-size:13.5px;font-weight:500;padding:10px 15px;border-radius:999px;border:1px solid transparent}
+.btn.primary{background:var(--crimson);color:#fff;box-shadow:0 14px 30px -20px rgba(139,30,49,.85)}
+.btn.primary:hover{background:var(--crimson-deep)}
+.btn.ghost{border-color:var(--line-2);color:var(--ink);background:color-mix(in srgb,var(--card) 55%,transparent)}
+.btn.ghost:hover{background:var(--card)}
+.meta{font-size:12px;color:var(--faint);margin-top:14px}
+/* hero latest panel */
+.panel{background:linear-gradient(150deg,#221016 0%,#5E1020 55%,#8B1E31 100%);border-radius:22px;padding:20px 20px 14px;color:#F8F3E8;box-shadow:0 34px 70px -48px rgba(109,18,36,.95),inset 0 1px 0 rgba(255,255,255,.15);min-height:250px;display:flex;flex-direction:column}
+.panel-head{display:flex;align-items:center;gap:8px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(248,243,232,.72);font-weight:600;margin-bottom:10px}
+.panel-head .dot{width:6px;height:6px;border-radius:50%;background:var(--gold-2);box-shadow:0 0 0 3px rgba(201,169,97,.18)}
+.panel-list{display:flex;flex-direction:column;gap:0;flex:1}
+.panel-item{display:flex;align-items:baseline;gap:10px;padding:10px 0;border-bottom:1px solid rgba(248,243,232,.14);text-decoration:none;color:#F8F3E8}
+.panel-item:last-child{border-bottom:0}
+.panel-item .n{font-family:var(--serif);font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.panel-item .t{font-family:var(--mono,ui-monospace,Consolas,monospace);font-size:10.5px;color:rgba(248,243,232,.6);margin-left:auto;white-space:nowrap}
+.panel-item:hover .n{color:var(--gold-2)}
+.panel-note{font-size:11px;color:rgba(248,243,232,.55);margin-top:10px}
+/* web cards */
+section.block{padding:26px 0 4px}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:14px}
+.sec-kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:4px}
+.sec-head h2{font-family:var(--serif);font-size:clamp(1.3rem,2.6vw,1.75rem);font-weight:600;color:var(--ink);margin:0;letter-spacing:-.01em}
+.sec-head p{margin:4px 0 0;color:var(--muted);font-size:13px}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media(max-width:860px){.cards{grid-template-columns:1fr}}
+.card{display:flex;flex-direction:column;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 18px 15px;box-shadow:0 1px 1px rgba(16,20,25,.03);transition:.18s ease;min-height:160px}
+.card:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--line-2)}
+.card h3{font-family:var(--serif);font-weight:600;font-size:1.08rem;color:var(--ink);margin:0 0 6px;line-height:1.35}
+.card p{margin:0;color:var(--muted);font-size:13.5px;flex:1}
+.card .go{margin-top:14px;font-size:12.5px;color:var(--crimson);font-weight:500}
+.card:hover .go{text-decoration:underline}
+/* repo list */
+.filter{display:flex;margin:0 0 10px}
+.filter input{width:100%;background:var(--card);border:1px solid var(--line-2);border-radius:9px;padding:9px 12px;color:var(--ink);font:inherit;font-size:13.5px}
+.filter input:focus{outline:2px solid var(--crimson);outline-offset:1px;border-color:transparent}
 .list{border-top:1px solid var(--line)}
-.row{display:flex;align-items:center;gap:14px;padding:13px 2px;border-bottom:1px solid var(--line);text-decoration:none}
-.row:hover{background:color-mix(in srgb,var(--green-soft) 45%,transparent)}
-.row .name{font-weight:500;white-space:nowrap}
-.row .desc{color:var(--muted);font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
-.row .meta{font-family:var(--mono);font-size:11px;color:var(--faint);white-space:nowrap}
-.row .go{color:var(--faint);font-family:var(--mono);font-size:13px}
-.row:hover .go{color:var(--green)}
-.note{color:var(--faint);font-size:12.5px;margin:10px 0 0}
-.filter{display:flex;gap:8px;margin:0 0 10px}
-.filter input{width:100%;background:var(--paper);border:1px solid var(--line-2);border-radius:8px;padding:9px 11px;color:var(--ink);font:inherit;font-size:14px}
-.filter input:focus{outline:2px solid var(--green);outline-offset:1px;border-color:transparent}
+.row{display:flex;align-items:center;gap:14px;padding:12px 2px;border-bottom:1px solid var(--line);text-decoration:none;color:inherit}
+.row:hover{background:color-mix(in srgb,var(--paper-2) 55%,transparent)}
+.row .name{font-weight:500;color:var(--ink);white-space:nowrap;font-size:14px}
+.row .desc{color:var(--muted);font-size:13px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .meta{font-family:ui-monospace,Consolas,monospace;font-size:10.5px;color:var(--faint);white-space:nowrap}
+.row .go{color:var(--faint);font-size:13px}
+.row:hover .go{color:var(--crimson)}
 .empty{color:var(--faint);font-size:13px;padding:14px 2px}
-footer{border-top:1px solid var(--line);margin-top:44px;padding:18px 0 40px;color:var(--faint);font-size:12.5px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.note{color:var(--faint);font-size:12px;margin:10px 0 0}
+footer{border-top:1px solid var(--line);margin-top:44px;padding:18px 0 40px;color:var(--faint);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 footer a{color:var(--muted);text-decoration:none}
 footer a:hover{color:var(--ink)}
-@media (max-width:560px){
-  .row{flex-wrap:wrap;gap:4px 12px}
+@media(max-width:560px){
+  .row{flex-wrap:wrap;gap:4px 10px}
   .row .desc{flex-basis:100%;order:3;white-space:normal}
   .row .meta{order:4}
-  .top{gap:10px}
 }
 </style>
 </head>
 <body>
+<a class="skip" href="#links">ข้ามไปที่ลิงก์</a>
 <div class="wrap">
   <header>
     <div class="top">
-      <a class="brand" href="./">Plub<span>.</span></a>
-      <nav aria-label="เมนู">
-        <a href="#links">ลิงก์</a>
+      <a class="brand" href="./">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h4l2-6 4 12 2-6h8"/></svg>
+        <span>Plub<small>หน้าแรก</small></span>
+      </a>
+      <nav class="nav">
+        <a href="#links">เว็บ</a>
         <a href="#repos">repo</a>
         <a href="#about">เกี่ยวกับ</a>
+        <a class="gh" href="https://github.com/Plub-Supanut" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <h1>รวมลิงก์ที่ใช้บ่อย</h1>
-    <p class="lede">หน้าเดียวสำหรับเปิดเว็บที่ใช้บ่อย และดู repo ล่าสุดจาก GitHub</p>
+    <section class="hero" aria-labelledby="title">
+      <div>
+        <div class="eyebrow">Plub-Supanut</div>
+        <h1 id="title">หน้าแรก<br />ของ<em>ผม</em></h1>
+        <p class="lede">รวม<strong>เว็บที่เปิดบ่อย</strong>และ repo ล่าสุดไว้ที่เดียว — เปิดจากมือถือหรือคอมได้เลย</p>
+        <div class="actions">
+          <a class="btn primary" href="#links">ไปที่ลิงก์</a>
+          <a class="btn ghost" href="https://github.com/Plub-Supanut" target="_blank" rel="noopener noreferrer">ดู GitHub</a>
+        </div>
+        <p class="meta">แก้ล่าสุด พ.ย. 2569 · เรียนแพทย์จุฬาฯ</p>
+      </div>
+      <div class="panel" aria-labelledby="recent-title">
+        <div class="panel-head" id="recent-title"><span class="dot"></span>อัปเดตล่าสุด</div>
+        <div class="panel-list" id="recentList"><div class="panel-note">กำลังโหลด…</div></div>
+        <div class="panel-note">จาก GitHub · เรียงตามวันที่อัปเดต</div>
+      </div>
+    </section>
 
-    <section id="links">
-      <h2>เว็บ</h2>
-      <div class="list">
-        <a class="row" href="ecg/">
-          <span class="name">ECG Field Guide</span>
-          <span class="desc">ทวนเกณฑ์ ECG และเรียน 9 บทเรียน</span>
-          <span class="meta">offline</span>
-          <span class="go">→</span>
+    <section class="block" id="links" aria-labelledby="links-title">
+      <div class="sec-head">
+        <div>
+          <div class="sec-kicker">Links</div>
+          <h2 id="links-title">เว็บที่เปิดบ่อย</h2>
+          <p>ลิงก์ตรง ไม่ต้องจำ URL</p>
+        </div>
+      </div>
+      <div class="cards">
+        <a class="card" href="ecg/">
+          <h3>ECG Field Guide</h3>
+          <p>ทวนเกณฑ์ ECG 9 บทเรียน พร้อมเครื่องคำนวณและแผนที่ 12 leads</p>
+          <span class="go">เปิดเว็บ →</span>
         </a>
-        <a class="row" href="https://plub-supanut.github.io/elective-guide/">
-          <span class="name">Elective Guide</span>
-          <span class="desc">ข้อมูล elective 117 สถานที่</span>
-          <span class="meta">MDCU</span>
-          <span class="go">→</span>
+        <a class="card" href="https://plub-supanut.github.io/elective-guide/">
+          <h3>Elective Guide</h3>
+          <p>ข้อมูล elective 117 สถานที่ พร้อมแผนที่และกำหนดการ</p>
+          <span class="go">เปิดเว็บ →</span>
         </a>
-        <a class="row" href="https://plub-supanut.github.io/mdcu-er-trauma-2569/">
-          <span class="name">ER &amp; Trauma 2569</span>
-          <span class="desc">ตารางเวรและเกณฑ์ ER/Trauma</span>
-          <span class="meta">print</span>
-          <span class="go">→</span>
-        </a>
-        <a class="row" href="verdict/">
-          <span class="name">Verdict</span>
-          <span class="desc">ข้อสอบนิติเวช 350+ ข้อ</span>
-          <span class="meta">exam</span>
-          <span class="go">→</span>
+        <a class="card" href="https://plub-supanut.github.io/mdcu-er-trauma-2569/">
+          <h3>ER &amp; Trauma 2569</h3>
+          <p>ตารางเวร เกณฑ์ประเมิน และ checklist ของบล็อค ER &amp; Trauma</p>
+          <span class="go">เปิดเว็บ →</span>
         </a>
       </div>
     </section>
 
-    <section id="repos">
-      <h2>Repo ล่าสุด</h2>
-      <div class="filter">
-        <input id="q" type="search" placeholder="ค้นหา repo" aria-label="ค้นหา repo" autocomplete="off" />
+    <section class="block" id="repos" aria-labelledby="repos-title">
+      <div class="sec-head">
+        <div>
+          <div class="sec-kicker">Repositories</div>
+          <h2 id="repos-title">Repo ล่าสุด</h2>
+          <p>ดึงจาก GitHub อัตโนมัติ — repo ใหม่ขึ้นเอง</p>
+        </div>
       </div>
-      <div class="list" id="repoList">
-        <p class="empty">กำลังโหลด…</p>
-      </div>
-      <p class="note">ดึงจาก GitHub อัตโนมัติ</p>
+      <div class="filter"><input id="q" type="search" placeholder="ค้นหา repo" aria-label="ค้นหา repo" autocomplete="off" /></div>
+      <div class="list" id="repoList"><p class="empty">กำลังโหลด…</p></div>
     </section>
 
-    <section id="about">
-      <h2>เกี่ยวกับ</h2>
-      <p class="lede" style="margin-bottom:0">ผมชื่อ Plub เรียนแพทย์จุฬาฯ ทำเว็บไว้ใช้เองในห้องเรียนและวอร์ด ถ้ามีอะไรผิดหรืออยากแนะนำ ทักได้ที่ GitHub</p>
+    <section class="block" id="about" aria-labelledby="about-title">
+      <div class="sec-head">
+        <div>
+          <div class="sec-kicker">About</div>
+          <h2 id="about-title">เกี่ยวกับ</h2>
+        </div>
+      </div>
+      <p class="lede" style="margin:0">ผมชื่อ Plub เรียนแพทย์จุฬาฯ ทำเว็บไว้ใช้เองในห้องเรียนและวอร์ด ถ้ามีอะไรผิดหรืออยากแนะนำ ทักได้ที่ GitHub</p>
     </section>
   </main>
 
   <footer>
-    <span>แก้ล่าสุด 4 พ.ย. 2026</span>
-    <span><a href="https://github.com/Plub-Supanut">GitHub</a> · <a href="https://github.com/Plub-Supanut/ecg-field-guide/blob/main/docs/GITHUB_STANDARD.md">standard</a></span>
+    <span>© 2569 Plub-Supanut</span>
+    <span><a href="https://github.com/Plub-Supanut/plub-standard">standard</a> · <a href="#top">กลับขึ้นด้านบน ↑</a></span>
   </footer>
 </div>
 
 <script>
 (function () {
   var list = document.getElementById('repoList');
+  var recent = document.getElementById('recentList');
   var q = document.getElementById('q');
   var all = [];
 
@@ -147,15 +212,14 @@ footer a:hover{color:var(--ink)}
   }
   function when(iso) {
     if (!iso) return '';
-    var d = new Date(iso);
-    if (isNaN(d)) return '';
+    var d = new Date(iso); if (isNaN(d)) return '';
     var days = Math.floor((Date.now() - d.getTime()) / 86400000);
     if (days <= 0) return 'วันนี้';
     if (days === 1) return 'เมื่อวาน';
     if (days < 30) return days + ' วันก่อน';
     return d.toLocaleDateString('th-TH', { day: 'numeric', month: 'short', year: '2-digit' });
   }
-  function render() {
+  function renderRepos() {
     var term = (q.value || '').trim().toLowerCase();
     var items = all.filter(function (r) {
       return !term || (r.name + ' ' + (r.description || '')).toLowerCase().indexOf(term) !== -1;
@@ -163,25 +227,33 @@ footer a:hover{color:var(--ink)}
     if (!items.length) { list.innerHTML = '<p class="empty">ไม่พบ repo ที่ตรงกับคำค้น</p>'; return; }
     list.innerHTML = items.map(function (r) {
       var href = r.homepage || r.html_url;
-      var desc = r.description || 'ไม่มีคำอธิบาย';
-      var lang = r.language ? r.language : '';
       return '<a class="row" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer">' +
         '<span class="name">' + esc(r.name) + '</span>' +
-        '<span class="desc">' + esc(desc) + '</span>' +
-        '<span class="meta">' + esc(lang) + (lang ? ' · ' : '') + esc(when(r.updated_at)) + '</span>' +
+        '<span class="desc">' + esc(r.description || 'ไม่มีคำอธิบาย') + '</span>' +
+        '<span class="meta">' + esc(r.language || '') + (r.language ? ' · ' : '') + esc(when(r.updated_at)) + '</span>' +
         '<span class="go">→</span></a>';
+    }).join('');
+  }
+  function renderRecent() {
+    var latest = all.slice(0, 3);
+    if (!latest.length) { recent.innerHTML = '<div class="panel-note">ยังไม่มี repo</div>'; return; }
+    recent.innerHTML = latest.map(function (r) {
+      var href = r.homepage || r.html_url;
+      return '<a class="panel-item" href="' + esc(href) + '" target="_blank" rel="noopener noreferrer">' +
+        '<span class="n">' + esc(r.name) + '</span><span class="t">' + esc(when(r.updated_at)) + '</span></a>';
     }).join('');
   }
   fetch('https://api.github.com/users/Plub-Supanut/repos?per_page=100&sort=updated', { headers: { Accept: 'application/vnd.github+json' } })
     .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
     .then(function (repos) {
       all = (repos || []).filter(function (r) { return !r.fork && !r.archived; });
-      render();
+      renderRepos(); renderRecent();
     })
     .catch(function () {
-      list.innerHTML = '<p class="empty">โหลดจาก GitHub ไม่ได้ — <a href="https://github.com/Plub-Supanut?tab=repositories">เปิดรายการ repo บน GitHub</a></p>';
+      list.innerHTML = '<p class="empty">โหลดจาก GitHub ไม่ได้ — <a href="https://github.com/Plub-Supanut?tab=repositories">เปิดบน GitHub</a></p>';
+      recent.innerHTML = '<div class="panel-note">โหลดไม่ได้</div>';
     });
-  q.addEventListener('input', render);
+  q.addEventListener('input', renderRepos);
 })();
 </script>
 </body>
