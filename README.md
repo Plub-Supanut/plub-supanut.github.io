@@ -1,12 +1,12 @@
-# Plub's Products — product hub
+# Plub — รวมลิงก์
 
-หน้าแรกของผลิตภัณฑ์ทั้งหมดของ **Plub-Supanut** — รวมเว็บแอปการเรียนแพทย์และเครื่องมือเอเจนต์ไว้ที่เดียว เพื่อไม่ให้ต้องจำ URL แยก
+รวมลิงก์ที่ใช้บ่อยและ repo ของ Plub-Supanut ไว้หน้าเดียว
 
 **เว็บจริง:** https://plub-supanut.github.io/
 
-## ผลิตภัณฑ์
+## ลิงก์
 
-| ผลิตภัณฑ์ | ประเภท | ลิงก์ |
+| เว็บ | ประเภท | ลิงก์ |
 | --- | --- | --- |
 | ECG Field Guide | เว็บแอป (offline) | https://plub-supanut.github.io/ecg/ |
 | Elective Guide | เว็บแอป | https://plub-supanut.github.io/elective-guide/ |
