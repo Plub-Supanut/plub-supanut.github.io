@@ -6,15 +6,14 @@
 
 ## ลิงก์
 
-| เว็บ | ประเภท | ลิงก์ |
-| --- | --- | --- |
-| ECG Field Guide | เว็บแอป (offline) | https://plub-supanut.github.io/ecg/ |
-| Elective Guide | เว็บแอป | https://plub-supanut.github.io/elective-guide/ |
-| ER & Trauma 2569 | เว็บแอป | https://plub-supanut.github.io/mdcu-er-trauma-2569/ |
-| Verdict | เว็บแอป | https://plub-supanut.github.io/verdict/ |
-| Hermes Bot Forge | Hermes plugin | https://github.com/Plub-Supanut/hermes-bot-forge |
-| Feeder Agent | Python agent | https://github.com/Plub-Supanut/Feeder-Agent |
+| เว็บ | ลิงก์ |
+| --- | --- |
+| ECG Field Guide | https://plub-supanut.github.io/ecg/ |
+| Elective Guide | https://plub-supanut.github.io/elective-guide/ |
+| ER & Trauma 2569 | https://plub-supanut.github.io/mdcu-er-trauma-2569/ |
+| Verdict | https://plub-supanut.github.io/verdict/ |
 
+repo ที่เป็นสาธารณะจะขึ้นในหน้าเว็บอัตโนมัติจาก GitHub API — ไม่ต้องแก้ไฟล์เมื่อมี repo ใหม่
 ## โครงสร้าง
 
 ```text
@@ -38,4 +37,4 @@ Repo นี้ทำตาม [GitHub Project Standard](https://github.com/Plub-
 
 ## License
 
-โค้ดของหน้านี้ © 2026 Plub-Supanut — เนื้อหาของแต่ละผลิตภัณฑ์มีลิขสิทธิ์ตาม repo ต้นทาง
+โค้ดของหน้านี้ © 2026 Plub-Supanut — เนื้อหาของแต่ละเว็บมีลิขสิทธิ์ตาม repo ต้นทาง
