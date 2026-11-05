@@ -35,6 +35,10 @@
   --blue-wash: rgba(47, 93, 138, 0.09);
   --violet: #6b4c83;
   --violet-wash: rgba(107, 76, 131, 0.1);
+  --on-dark: #f6f1e6;
+  --on-dark-muted: rgba(246, 241, 230, 0.7);
+  --on-dark-line: rgba(246, 241, 230, 0.16);
+  --redflag-accent: #e08a7e;
   --grid-minor: rgba(190, 70, 70, 0.085);
   --grid-major: rgba(190, 70, 70, 0.17);
   --shadow-sm: 0 2px 0 rgba(23, 33, 29, 0.04), 0 10px 28px -22px rgba(23, 33, 29, 0.4);
@@ -1272,17 +1276,28 @@ body[data-mode="quick"] .progress-chip { display: none; }
 
 /* ---------- red flags ---------- */
 
+/* This band is always dark, so its foreground must not follow --bg (which is
+   dark in night mode). Use dedicated on-dark tokens in both themes. */
 .redflag-section {
   background: var(--ink);
-  color: var(--bg);
+  color: var(--on-dark);
   border-top: 0;
 }
 [data-theme="night"] .redflag-section { background: #0a0f0c; }
-.redflag-section .section-index { color: color-mix(in srgb, var(--bg) 55%, transparent); }
-.redflag-section .section-index::before { background: color-mix(in srgb, var(--bg) 35%, transparent); }
-.redflag-section .section-title { color: var(--bg); }
-.redflag-section .section-sub { color: color-mix(in srgb, var(--bg) 62%, transparent); }
-.redflag-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: color-mix(in srgb, var(--bg) 16%, transparent); border: 1px solid color-mix(in srgb, var(--bg) 16%, transparent); border-radius: var(--radius); overflow: hidden; }
+.redflag-section .section-index { color: color-mix(in srgb, var(--on-dark) 58%, transparent); }
+.redflag-section .section-index::before { background: color-mix(in srgb, var(--on-dark) 35%, transparent); }
+.redflag-section .section-title { color: var(--on-dark); }
+.redflag-section .section-title em { color: #8fdcc8; }
+.redflag-section .section-sub { color: var(--on-dark-muted); }
+.redflag-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--on-dark-line);
+  border: 1px solid var(--on-dark-line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
 .redflag {
   display: grid;
   grid-template-columns: 44px 1fr;
@@ -1294,12 +1309,11 @@ body[data-mode="quick"] .progress-chip { display: none; }
 [data-theme="night"] .redflag { background: #0a0f0c; }
 .redflag:hover { background: color-mix(in srgb, var(--ink) 82%, #fff); }
 [data-theme="night"] .redflag:hover { background: #101712; }
-.redflag-num { font-family: var(--mono); font-size: 11px; color: var(--red); padding-top: 2px; }
-.redflag h3 { font-family: var(--serif); font-size: 23px; font-weight: 400; line-height: 1.1; letter-spacing: -.02em; color: var(--bg); }
-.redflag p { margin-top: 7px; font-size: 12px; line-height: 1.6; color: color-mix(in srgb, var(--bg) 60%, transparent); }
-.redflag b { color: var(--bg); font-weight: 650; }
-.redflag .action { display: inline-flex; align-items: center; gap: 6px; margin-top: 11px; font-family: var(--mono); font-size: 8.5px; letter-spacing: .08em; color: #d9a24c; text-transform: uppercase; }
-[data-theme="night"] .redflag .action { color: #e6b566; }
+.redflag-num { font-family: var(--mono); font-size: 11px; color: var(--redflag-accent); padding-top: 2px; }
+.redflag h3 { font-family: var(--serif); font-size: 23px; font-weight: 400; line-height: 1.1; letter-spacing: -.02em; color: var(--on-dark); }
+.redflag p { margin-top: 7px; font-size: 12px; line-height: 1.6; color: var(--on-dark-muted); }
+.redflag b { color: var(--on-dark); font-weight: 650; }
+.redflag .action { display: inline-flex; align-items: center; gap: 6px; margin-top: 11px; font-family: var(--mono); font-size: 8.5px; letter-spacing: .08em; color: #e6b566; text-transform: uppercase; }
 
 /* ---------- drill CTA ---------- */
 
@@ -1599,13 +1613,13 @@ body[data-mode="quick"] .progress-chip { display: none; }
   padding: 18px 20px;
   border-radius: 11px;
   background: var(--ink);
-  color: var(--bg);
+  color: var(--on-dark);
   font-family: var(--mono);
   font-size: 13px;
   line-height: 1.8;
   overflow-x: auto;
 }
-.formula .comment { color: color-mix(in srgb, var(--bg) 52%, transparent); font-size: 10px; }
+.formula .comment { color: color-mix(in srgb, var(--on-dark) 58%, transparent); font-size: 10px; }
 [data-theme="night"] .formula { background: #0a0f0c; }
 
 .figure {
