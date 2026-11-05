@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/preview.png" alt="หน้าแรก Plub" width="100%" />
+  <img src="assets/logo-mark.svg" width="76" alt="Plub logo" />
   <h1>Plub</h1>
   <p><strong>รวมลิงก์ที่ใช้บ่อยและ repo ล่าสุด</strong> — หน้าเดียวสำหรับเปิดใช้งานจริง</p>
   <p>

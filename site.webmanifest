@@ -1,0 +1,16 @@
+{
+  "name": "Plub",
+  "short_name": "Plub",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F8F5EE",
+  "theme_color": "#8B1E31",
+  "icons": [
+    {
+      "src": "/assets/logo-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
