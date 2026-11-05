@@ -1853,6 +1853,74 @@ dialog::backdrop { background: rgba(10, 15, 12, 0.52); -webkit-backdrop-filter: 
 .quiz-result p { margin: 8px auto 0; max-width: 420px; font-size: 13px; color: var(--muted); line-height: 1.65; }
 .quiz-result .btn { margin-top: 20px; }
 
+/* memory drill */
+.quiz-option .option-text { flex: 1; min-width: 0; line-height: 1.5; }
+.quiz-intro { padding: 6px 2px 4px; }
+.quiz-intro-title {
+  margin-top: 10px;
+  font-family: var(--serif);
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -.03em;
+}
+.quiz-intro-lead {
+  margin-top: 12px;
+  max-width: 620px;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.quiz-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 22px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.quiz-stats > div { padding: 14px 12px 14px 0; display: grid; gap: 3px; }
+.quiz-stats > div + div { padding-left: 16px; border-left: 1px solid var(--line); }
+.quiz-stats b { font-family: var(--serif); font-size: 28px; font-weight: 400; line-height: 1; }
+.quiz-stats span { font-family: var(--mono); font-size: 8px; letter-spacing: .08em; color: var(--muted); text-transform: uppercase; }
+.memory-start-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
+.memory-start {
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  min-height: 138px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--surface);
+  color: var(--ink);
+  text-align: left;
+  transition: border-color .2s, transform .2s, background .2s;
+}
+.memory-start:hover { border-color: var(--line-strong); transform: translateY(-2px); background: var(--surface-2); }
+.memory-start .ms-kicker { font-family: var(--mono); font-size: 8px; letter-spacing: .1em; color: var(--green); }
+.memory-start b { font-family: var(--serif); font-size: 21px; font-weight: 400; line-height: 1.15; letter-spacing: -.02em; }
+.memory-start > span:last-child { font-size: 11.5px; line-height: 1.5; color: var(--muted); }
+.memory-start-all { background: #0b5d4f; border-color: #0b5d4f; color: #fff; }
+.memory-start-all:hover { background: #0e7561; border-color: #0e7561; }
+.memory-start-all .ms-kicker, .memory-start-all > span:last-child { color: rgba(255,255,255,.72); }
+.quiz-intro-foot { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+.quiz-best { font-family: var(--mono); font-size: 8.5px; letter-spacing: .08em; color: var(--muted); text-transform: uppercase; }
+.memory-clue {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink);
+  background: var(--surface-2);
+  border-left: 3px solid var(--green);
+}
+.quiz-feedback-actions { margin-top: 9px; }
+.memory-wrong { margin-top: 18px; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); text-align: left; }
+.memory-wrong.is-perfect { border-color: color-mix(in srgb, var(--green) 28%, var(--line)); background: var(--green-wash); }
+.memory-wrong p { margin-top: 6px; text-align: left; }
+.memory-wrong-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.memory-wrong-chips .chip { cursor: pointer; }
+.memory-result-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 20px; }
+.memory-result-actions .btn { margin-top: 0; }
+
 /* palette */
 .palette {
   width: min(680px, calc(100% - 32px));
@@ -2023,6 +2091,11 @@ dialog::backdrop { background: rgba(10, 15, 12, 0.52); -webkit-backdrop-filter: 
   .drawer-body { padding: 20px 18px 34px; }
   .quiz-modal { max-height: 100vh; height: 100%; border-radius: 0; }
   .quiz-body { max-height: calc(100vh - 68px); }
+  .memory-start-grid { grid-template-columns: 1fr; }
+  .memory-start { min-height: 0; }
+  .quiz-intro-title { font-size: 30px; }
+  .quiz-stats b { font-size: 24px; }
+  .quiz-intro-foot { align-items: flex-start; }
   .palette { margin-top: 7vh; }
   .redflag { padding: 20px 16px; grid-template-columns: 34px 1fr; gap: 10px; }
   .redflag h3 { font-size: 21px; }
@@ -2265,14 +2338,8 @@ dialog::backdrop { background: rgba(10, 15, 12, 0.52); -webkit-backdrop-filter: 
         </a>
         <button class="btn" data-open-drill>
           <svg aria-hidden="true"><use href="#i-target"/></svg>
-          ทดสอบ 10 ข้อ
+          ทบทวน 205 ข้อ
         </button>
-      </div>
-      <div class="hero-meta">
-        <span>9 บทเรียน</span>
-        <span>39 เกณฑ์</span>
-        <span>10 ข้อสอบ</span>
-        <span>ใช้ได้แบบ offline</span>
       </div>
     </div>
 
@@ -2702,12 +2769,12 @@ dialog::backdrop { background: rgba(10, 15, 12, 0.52); -webkit-backdrop-filter: 
     <div class="section-inner">
       <div class="drill-cta reveal">
         <div class="drill-cta-copy">
-          <div class="section-index">07 / Self test</div>
-          <h3>อ่านจบแล้ว — ลองอ่านคนไข้ 10 คน</h3>
-          <p>คำถามสถานการณ์จริง 10 ข้อ พร้อมเฉลยและเหตุผลทุกข้อ คะแนนจะถูกเก็บไว้ในเครื่องนี้</p>
+          <div class="section-index">07 / Memory drill</div>
+          <h3>อ่านจบแล้ว — ทบทวนเกณฑ์ 205 ข้อ</h3>
+          <p>ข้อสอบ 5 ตัวเลือก ครอบคลุมทั้ง 39 เกณฑ์ เลือกทำชุดสั้น 20 ข้อ ชุดครบเกณฑ์ 39 ข้อ หรือทำทั้งหมด 205 ข้อ</p>
         </div>
         <button class="btn primary" data-open-drill>
-          เริ่มทำข้อสอบ
+          เริ่มทบทวน
           <svg class="arrow" aria-hidden="true"><use href="#i-arrow-r"/></svg>
         </button>
       </div>
@@ -4141,7 +4208,7 @@ dialog::backdrop { background: rgba(10, 15, 12, 0.52); -webkit-backdrop-filter: 
     <button class="complete-btn" data-complete="9"><svg><use href="#i-check"/></svg><span>ทำเครื่องหมายว่าอ่านจบ</span></button>
     <div class="lesson-pager">
       <button class="pager-btn" data-prev-lesson="8"><svg><use href="#i-arrow-l"/></svg> ก่อนหน้า</button>
-      <button class="pager-btn" data-open-drill>ทำข้อสอบ 10 ข้อ <svg><use href="#i-arrow-r"/></svg></button>
+      <button class="pager-btn" data-open-drill>ทบทวนเกณฑ์ 205 ข้อ <svg><use href="#i-arrow-r"/></svg></button>
     </div>
   </footer>
 </section>
@@ -4887,6 +4954,415 @@ const QUIZ = [
 
 
 /* ============================================================
+   MEMORY DRILL — 205 criterion-recall questions
+   Five questions per criterion + 10 high-yield scenarios.
+   Options are generated from the criteria in the same family.
+   ============================================================ */
+
+const MEMORY_TITLES = {
+  nsr: "Normal Sinus Rhythm",
+  af: "Atrial Fibrillation",
+  flutter: "Atrial Flutter",
+  mat: "Multifocal Atrial Tachycardia / WAP",
+  vt: "Ventricular Tachycardia",
+  lad: "Left Axis Deviation",
+  rad: "Right Axis Deviation",
+  lafb: "Left Anterior Fascicular Block",
+  lpfb: "Left Posterior Fascicular Block",
+  rae: "Right Atrial Enlargement",
+  lae: "Left Atrial Enlargement",
+  biatrial: "Biatrial Enlargement",
+  "first-degree": "First-Degree AV Block",
+  mobitz1: "Mobitz I (Wenckebach)",
+  mobitz2: "Mobitz II",
+  chb: "Complete AV Block",
+  wpw: "Wolff-Parkinson-White",
+  "low-voltage": "Low QRS Voltage",
+  lvh: "Left Ventricular Hypertrophy",
+  rvh: "Right Ventricular Hypertrophy",
+  lbbb: "Left Bundle Branch Block",
+  rbbb: "Right Bundle Branch Block",
+  bifascicular: "Bifascicular Block",
+  alternans: "Electrical Alternans",
+  ashman: "Ashman Phenomenon",
+  stemi: "ST-Elevation MI (STEMI)",
+  posterior: "Posterior MI",
+  "rv-infarct": "Right Ventricular Infarction",
+  pericarditis: "Acute Pericarditis",
+  brugada: "Brugada Syndrome",
+  sgarbossa: "Sgarbossa Criteria",
+  "st-depression": "ST Depression",
+  wellens: "Wellens Syndrome",
+  hyperacute: "Hyperacute T Wave",
+  "hyperkalemia-t": "Tented T (Hyperkalemia)",
+  "long-qt": "Long QT / TdP Risk",
+  "short-qt": "Short QT",
+  "prominent-u": "Prominent U Wave",
+  "inverted-u": "Inverted U Wave"
+};
+
+/* Deliberately short, comparable option labels: every option in a question
+   uses the same "code · short clinical name" shape so length does not give
+   away the answer. */
+const MEMORY_OPTION_LABELS = {
+  nsr: "R-01 · Normal sinus rhythm",
+  af: "R-02 · Atrial fibrillation",
+  flutter: "R-03 · Atrial flutter",
+  mat: "R-04 · MAT / WAP pattern",
+  vt: "R-05 · VT (wide complex)",
+  lad: "A-01 · Left axis deviation",
+  rad: "A-02 · Right axis deviation",
+  lafb: "A-03 · LAFB (left anterior)",
+  lpfb: "A-04 · LPFB (left posterior)",
+  rae: "P-01 · Right atrial enlargement",
+  lae: "P-02 · Left atrial enlargement",
+  biatrial: "P-03 · Biatrial enlargement",
+  "first-degree": "AV-01 · First-degree AV block",
+  mobitz1: "AV-02 · Mobitz I (Wenckebach)",
+  mobitz2: "AV-03 · Mobitz II block",
+  chb: "AV-04 · Complete AV block",
+  wpw: "AV-05 · Wolff-Parkinson-White",
+  "low-voltage": "Q-01 · Low QRS voltage",
+  lvh: "Q-02 · LVH (voltage)",
+  rvh: "Q-03 · RVH (voltage)",
+  lbbb: "Q-04 · LBBB (wide QRS)",
+  rbbb: "Q-05 · RBBB (wide QRS)",
+  bifascicular: "Q-06 · Bifascicular block",
+  alternans: "Q-07 · Electrical alternans",
+  ashman: "Q-08 · Ashman phenomenon",
+  stemi: "S-01 · STEMI (ST elevation)",
+  posterior: "S-02 · Posterior MI pattern",
+  "rv-infarct": "S-03 · RV infarction pattern",
+  pericarditis: "S-04 · Acute pericarditis",
+  brugada: "S-05 · Brugada type 1",
+  sgarbossa: "S-06 · Sgarbossa criteria",
+  "st-depression": "S-07 · ST depression",
+  wellens: "T-01 · Wellens pattern",
+  hyperacute: "T-02 · Hyperacute T wave",
+  "hyperkalemia-t": "T-03 · Tented T (hyperkalemia)",
+  "long-qt": "QT-01 · Long QT / TdP risk",
+  "short-qt": "QT-02 · Short QT syndrome",
+  "prominent-u": "QT-03 · Prominent U wave",
+  "inverted-u": "QT-04 · Inverted U wave"
+};
+
+const MEMORY_POOLS = {
+  rhythm: ["nsr", "af", "flutter", "mat", "vt"],
+  axis: ["lad", "rad", "lafb", "lpfb", "lvh"],
+  atria: ["rae", "lae", "biatrial", "first-degree", "wpw"],
+  av: ["first-degree", "mobitz1", "mobitz2", "chb", "wpw"],
+  qrs: ["low-voltage", "lvh", "rvh", "lbbb", "rbbb", "bifascicular", "alternans", "ashman"],
+  st: ["stemi", "posterior", "rv-infarct", "pericarditis", "brugada", "sgarbossa", "st-depression"],
+  t: ["wellens", "hyperacute", "hyperkalemia-t", "st-depression", "pericarditis"],
+  qt: ["long-qt", "short-qt", "prominent-u", "inverted-u", "hyperkalemia-t"]
+};
+
+/* Avoid options that are also true for the clue (for example LAD vs LAFB,
+   or RAE vs biatrial enlargement). The override pool keeps distractors
+   plausible but not technically correct. */
+const MEMORY_POOL_OVERRIDES = {
+  lad: ["lad", "rad", "lvh", "rvh", "low-voltage"],
+  rad: ["lad", "rad", "lvh", "rvh", "low-voltage"],
+  lafb: ["lafb", "lpfb", "lvh", "rvh", "low-voltage"],
+  lpfb: ["lafb", "lpfb", "lvh", "rvh", "low-voltage"],
+  rae: ["rae", "lae", "first-degree", "wpw", "nsr"],
+  lae: ["lae", "rae", "first-degree", "wpw", "nsr"],
+  biatrial: ["biatrial", "rae", "lae", "first-degree", "wpw"],
+  bifascicular: ["bifascicular", "lbbb", "rvh", "alternans", "ashman"],
+  "rv-infarct": ["rv-infarct", "posterior", "pericarditis", "brugada", "st-depression"]
+};
+
+const MEMORY_CLUES = {
+  nsr: [
+    "P wave ตั้งใน I, II และ aVF แต่หัวกลับใน aVR โดยมี P ก่อน QRS ทุกตัว",
+    "อัตรา 60–100 bpm และ P–P กับ R–R คงที่",
+    "PR interval 120–200 ms คงที่ พร้อม 1:1 AV conduction",
+    "P wave ใน V1 เป็น biphasic (+/−) และ rate ไม่เกิน 100",
+    "จังหวะ sinus ปกติที่ไม่มี dropped beat และไม่มี ectopic P"
+  ],
+  af: [
+    "R–R ไม่สม่ำเสมอแบบ irregularly irregular และไม่มี P wave ที่แท้จริง",
+    "เห็น fibrillatory baseline ร่วมกับ QRS แคบ",
+    "ใจสั่น อัตราเร็วและ irregular โดยไม่เห็น P ชัด",
+    "QRS กว้าง irregular ที่เร็วมาก ร่วมกับ accessory pathway — ห้าม AV nodal blocker",
+    "จังหวะ irregular ที่ rate ช้ามากและอาจร่วมกับ complete AV block"
+  ],
+  flutter: [
+    "sawtooth waves ชัดใน II, III และ aVF",
+    "atrial rate ประมาณ 300 bpm และ ventricular rate ประมาณ 150",
+    "narrow-complex tachycardia ~150 bpm ที่ไม่เห็น P ชัด",
+    "AV conduction 2:1, 3:1 หรือ variable block",
+    "flutter waves อาจถูกอ่านผิดเป็น P wave หรือ T wave"
+  ],
+  mat: [
+    "P wave อย่างน้อย 3 รูปแบบในลีดเดียวกัน และ PR interval ไม่เท่ากัน",
+    "rate > 100 bpm ร่วมกับ P หลาย morphology",
+    "rate < 100 bpm ที่มี P หลาย morphology",
+    "พบใน COPD exacerbation, theophylline toxicity หรือ severe hypoxemia",
+    "QRS แคบและยังเห็น P wave หลายรูปแบบ ไม่ใช่ AF"
+  ],
+  vt: [
+    "wide-complex tachycardia ที่มี AV dissociation",
+    "เห็น capture beat หรือ fusion beat ระหว่าง tachycardia",
+    "precordial concordance หรือ extreme axis ใน wide-complex tachycardia",
+    "ผู้ป่วย structural heart disease หรือ prior MI มี wide-complex tachycardia",
+    "ถ้าแยก wide-complex tachycardia กับ SVT with aberrancy ไม่ได้และ unstable ให้รักษาแบบ worst-case"
+  ],
+  lad: [
+    "Lead I บวก, aVF ลบ และ Lead II ลบ",
+    "แกนไฟฟ้าอยู่ระหว่าง −30° ถึง −90°",
+    "แกนเบนซ้ายมากกว่า −30° ร่วมกับ Lead II ลบ",
+    "สาเหตุจาก LAFB, prior inferior MI, RV pacing หรือ WPW",
+    "แกนเบนซ้ายมากอาจพบ RV apical pacing หรือ WPW"
+  ],
+  rad: [
+    "Lead I ลบ, aVF บวก และแกนอยู่ระหว่าง +90° ถึง +180°",
+    "พบใน cor pulmonale, PE หรือ COPD",
+    "อาจเป็น normal variant ในเด็กทารกหรือคนสูงผอม",
+    "ต้องตรวจ dextrocardia และ lead reversal เมื่อเจอแกนนี้",
+    "LPFB เป็น diagnosis of exclusion เมื่อมีแกนนี้"
+  ],
+  lafb: [
+    "แกน < −45° ร่วมกับ qR ใน I/aVL และ rS ใน II/III/aVF",
+    "QRS < 120 ms แต่มี delayed intrinsicoid deflection ใน aVL",
+    "block ที่ anterior fascicle ทำให้ไฟฟ้าวิ่งลง posterior ก่อน",
+    "fascicular block ชนิดนี้พบร่วมกับ RBBB ได้บ่อยกว่าอีกชนิดมาก",
+    "เป็นสาเหตุที่พบบ่อยที่สุดของ pathological left axis deviation"
+  ],
+  lpfb: [
+    "แกน > +90° ร่วมกับ qR ใน II/III/aVF และ rS ใน I/aVL",
+    "delayed intrinsicoid deflection ใน aVF ≥ 45 ms",
+    "เกิดจาก block ของ posterior fascicle ทำให้ไฟฟ้าวิ่งขึ้นบนก่อน",
+    "ผู้ป่วยมักมีแกนเบนขวา แต่ต้อง exclude สาเหตุอื่นก่อน",
+    "พบร่วมกับ RBBB ได้ แต่น้อยกว่าอีก fascicular block"
+  ],
+  rae: [
+    "P wave สูงแหลม ≥ 2.5 mm ใน II, III หรือ aVF",
+    "initial positive deflection ใน V1 ≥ 1.5 mm",
+    "P สูงขึ้นแต่ไม่กว้างขึ้น เพราะ RA depolarize เสร็จก่อน LA",
+    "พบใน COPD, pulmonary hypertension, PE หรือ tricuspid disease",
+    "P pulmonale มักสัมพันธ์กับ RVH/RV strain"
+  ],
+  lae: [
+    "P wave กว้าง ≥ 120 ms และมี notch ห่าง ≥ 40 ms ใน II",
+    "V1 terminal negative phase ลึก > 1 mm และกว้าง > 40 ms",
+    "P กว้างขึ้นเพราะ LA depolarize ช้าลง",
+    "พบใน severe hypertension, mitral/aortic valve disease, HCM, DCM",
+    "เป็น marker ของ LV diastolic dysfunction และเพิ่ม risk AF"
+  ],
+  biatrial: [
+    "P wave ใน II ทั้งสูง ≥ 2.5 mm และกว้าง ≥ 120 ms",
+    "V1 initial positive ≥ 1.5 mm ร่วมกับ terminal negative ลึก/กว้าง",
+    "เข้าเกณฑ์ทั้ง RAE และ LAE พร้อมกัน",
+    "P tricuspidale เป็นชื่อเดิมของภาวะนี้",
+    "พบใน rheumatic heart disease หรือ congenital heart disease"
+  ],
+  "first-degree": [
+    "PR > 200 ms คงที่ทุก beat และ P ทุกตัวนำลง QRS",
+    "ไม่มี dropped beat แต่มี PR ยาวกว่าปกติ",
+    "มักเกิดที่ AV node จาก vagal tone หรือ AV nodal blocker",
+    "ถ้าร่วมกับ bifascicular block = incomplete trifascicular block",
+    "พบใน inferior MI, aging fibrosis หรือยาที่ชะลอ AV node"
+  ],
+  mobitz1: [
+    "PR ค่อย ๆ ยาวขึ้นทีละ beat แล้วมี P หลุด",
+    "เห็น group beating และ R–R สั้นลงก่อน beat ที่หลุด",
+    "cycle เริ่มใหม่ด้วย PR ที่สั้นที่สุด",
+    "มักอยู่ที่ AV node และตอบสนองต่อ atropine",
+    "inferior MI ทำให้เกิด block ชนิดนี้ได้บ่อย"
+  ],
+  mobitz2: [
+    "PR คงที่ทุก beat แล้วมี P หลุดกะทันหัน",
+    "QRS มักกว้างและตำแหน่ง block อยู่ infranodal",
+    "พยากรณ์โรคแย่กว่า block ที่ AV node และมักต้อง pacing",
+    "ต้อง admit และปรึกษา pacemaker",
+    "ไม่มี PR lengthening ก่อน dropped beat"
+  ],
+  chb: [
+    "P และ QRS เต้นคนละอัตราและไม่สัมพันธ์กัน",
+    "junctional escape ให้ QRS แคบ rate 40–60",
+    "ventricular escape ให้ QRS กว้าง rate 20–40",
+    "P–P คงที่และ R–R คงที่ แต่คนละ rate",
+    "P อาจทับ QRS หรือ T wave โดยไม่มี conduction"
+  ],
+  wpw: [
+    "PR < 120 ms ร่วมกับ delta wave และ QRS กว้าง",
+    "มี accessory pathway ข้าม AV node",
+    "secondary ST–T change ตรงข้าม delta wave",
+    "เสี่ยง AVRT และ pre-excited AF",
+    "ห้าม AV nodal blocker ใน pre-excited AF"
+  ],
+  "low-voltage": [
+    "QRS amplitude รวม < 5 mm ในทุก limb lead",
+    "QRS amplitude รวม < 10 mm ในทุก chest lead",
+    "พบใน pericardial effusion, severe obesity, anasarca, myxedema",
+    "low voltage + alternans + tachycardia = คิดถึง tamponade",
+    "limb ต่ำแต่ chest สูงผิดปกติ เข้าได้กับ Goldberger’s triad"
+  ],
+  lvh: [
+    "S_V1 + R_V5/V6 ≥ 35 mm",
+    "Cornell: S_V3 + R_aVL ≥ 28 mm ชาย / ≥ 20 mm หญิง",
+    "R_aVL ≥ 11 mm หรือ LV strain ร่วมด้วย",
+    "intrinsicoid deflection ใน V5/V6 ≥ 45 ms",
+    "voltage สูงเด่นใน V5/V6 และอาจมี LAE ร่วม"
+  ],
+  rvh: [
+    "V1 R ≥ 7 mm และ R/S > 1",
+    "V5/V6 S ≥ 7 mm และ R/S < 1",
+    "มักมี RAD และ RAE ร่วมด้วย",
+    "RV strain เห็น ST depression/T inversion ใน V1–V3, II, III, aVF",
+    "พบร่วมกับ cor pulmonale/COPD"
+  ],
+  lbbb: [
+    "QRS ≥ 120 ms, V1 deep broad S, V6 notched R",
+    "ไม่มี septal q ใน I, aVL, V5, V6",
+    "WiLLiaM pattern",
+    "secondary ST–T discordance; ใช้ Sgarbossa เมื่อสงสัย ischemia",
+    "QRS กว้างแบบนี้ + chest pain ต้องระวัง STEMI ที่ซ่อนอยู่"
+  ],
+  rbbb: [
+    "QRS ≥ 120 ms, V1 rsR′, V6 slurred S",
+    "MaRRoW pattern",
+    "อย่างเดียวอาจพบในคนhealthy",
+    "มักมี normal axis ถ้าเป็น isolated RBBB",
+    "อาจเกิดหลัง right heart catheterization หรือ right ventricular procedure"
+  ],
+  bifascicular: [
+    "RBBB + LAFB (LAD < −45°)",
+    "RBBB + LPFB (RAD > +90°)",
+    "RBBB + LAFB + first-degree AV block = incomplete trifascicular",
+    "alternating RBBB/LBBB เทียบเท่า incomplete trifascicular",
+    "new bifascicular block + syncope = admit/pacemaker"
+  ],
+  alternans: [
+    "QRS amplitude สลับสูง–ต่ำทุก beat",
+    "large pericardial effusion/tamponade",
+    "AVRT/WPW ที่มี asymmetrical conduction",
+    "post-pericardiectomy",
+    "ต่างจาก respiratory variation ที่ค่อย ๆ เปลี่ยนตามการหายใจ"
+  ],
+  ashman: [
+    "long–short cycle แล้ว beat ถัดไปมี QRS กว้าง",
+    "wide QRS จาก phase 3 aberrancy",
+    "ต้องเห็น long–short sequence หลาย beat",
+    "beat เดียวโดดที่กว้างอาจเป็น PVC มากกว่า",
+    "เป็น physiologic aberrancy ไม่ใช่ VT"
+  ],
+  stemi: [
+    "ST elevation ≥ 1 mm ใน 2 contiguous leads",
+    "V2–V3: ≥2.0 mm (ชาย ≥40 ปี), ≥2.5 mm (ชาย <40 ปี), ≥1.5 mm (หญิง)",
+    "มี reciprocal ST depression ในผนังตรงข้าม",
+    "ต้องรีบ reperfusion; door-to-balloon สำคัญ",
+    "ST elevation ใน V2–V3 ในคนหนุ่มอาจเป็น normal variant"
+  ],
+  posterior: [
+    "V1–V3 ST depression + tall R + upright T",
+    "posterior leads V7–V9 ST elevation ≥ 0.5 mm",
+    "culprit มักเป็น LCx หรือ distal RCA",
+    "เป็น mirror image ของ posterior ST elevation",
+    "อย่าอ่านเป็น anterior ischemia อย่างเดียว"
+  ],
+  "rv-infarct": [
+    "inferior STEMI + hypotension",
+    "V4R ST elevation ≥ 0.5 mm",
+    "มักมี STE III > II และ V1",
+    "ระวัง nitrates/diuretics ที่ลด preload",
+    "treatment = fluid challenge + reperfusion"
+  ],
+  pericarditis: [
+    "ST elevation concave กระจายหลายลีด",
+    "PR depression หลายลีด + PR elevation ใน aVR",
+    "ไม่มี reciprocal ST depression ยกเว้น aVR/V1",
+    "เจ็บอกแหลม ๆ ตอนหายใจเข้า",
+    "ไม่ควรเห็น reciprocal change แบบ STEMI"
+  ],
+  brugada: [
+    "coved ST elevation ≥ 2 mm + negative T ใน V1–V2",
+    "saddleback STE ≥ 2 mm, trough ≥ 1 mm",
+    "SCN5A loss-of-function และเสี่ยง VF",
+    "ไข้และยาบางกลุ่มกระตุ้น pattern",
+    "Type 1 + syncope = high risk, consult EP"
+  ],
+  sgarbossa: [
+    "ST elevation ≥ 1 mm concordant กับ QRS",
+    "ST depression ≥ 1 mm ใน V1–V3",
+    "discordant STE ≥ 5 mm หรือ ST/S ratio > 0.25",
+    "ใช้ใน LBBB, LVH หรือ paced rhythm",
+    "concordant changes specific ที่สุด"
+  ],
+  "st-depression": [
+    "horizontal/downsloping STD ≥ 0.5 mm = ischemia",
+    "STD ใน NSTE-ACS จาก subendocardial ischemia",
+    "digitalis: scooped STD + QT สั้น",
+    "ventricular strain: asymmetric downsloping STD + T inversion",
+    "de Winter: upsloping STD + tall peaked T = proximal LAD occlusion"
+  ],
+  wellens: [
+    "biphasic T ใน V2–V3 หลังหายเจ็บอก",
+    "deeply inverted T สมมาตรใน V2–V3",
+    "critical proximal LAD stenosis",
+    "ห้าม exercise stress test",
+    "ต้องส่ง coronary angiogram"
+  ],
+  hyperacute: [
+    "T สูงใหญ่ ฐานกว้าง สมมาตร",
+    "สัญญาณแรกสุดของ acute transmural ischemia",
+    "มักมี reciprocal change ในลีดตรงข้าม",
+    "อาจนำหน้า ST elevation",
+    "T เปลี่ยนแปลงก่อนที่ ST segment จะยกใน early STEMI"
+  ],
+  "hyperkalemia-t": [
+    "T สูง ฐานแคบ ยอดแหลมสมมาตร",
+    "QRS กว้างขึ้นและ P แบน/หาย",
+    "อาจลุกลามเป็น sine wave/asystole",
+    "พบใน renal failure, ACEi/ARB, K-sparing diuretic",
+    "treatment: IV calcium + shift K⁺"
+  ],
+  "long-qt": [
+    "QTc > 460 ms (ชาย) หรือ > 470 ms (หญิง)",
+    "QTc > 500 ms = high risk Torsades",
+    "hypocalcemia ทำให้ phase 2 ยาวและ QT prolong",
+    "QT-prolonging drugs เช่น macrolide, fluoroquinolone, ondansetron",
+    "LQT1 exercise, LQT2 startle, LQT3 sleep/bradycardia"
+  ],
+  "short-qt": [
+    "QTc < 340–360 ms",
+    "hypercalcemia ทำให้ phase 2 สั้น",
+    "digitalis ทำให้ QT สั้น + scooped ST",
+    "congenital SQTS เสี่ยง AF และ sudden death",
+    "short QT syndrome เป็น rare แต่เพิ่ม VF risk"
+  ],
+  "prominent-u": [
+    "U wave > 2 mm หรือ > 25% ของ T",
+    "severe hypokalemia ทำให้ T แบนและ U เด่น",
+    "T–U fusion คล้ายหนอกอูฐ",
+    "อาจถูกอ่านผิดเป็น long QT แต่เป็น long QU",
+    "พบใน hypomagnesemia, digitalis, LVH, bradycardia"
+  ],
+  "inverted-u": [
+    "U wave หัวกลับ ผิดปกติเสมอ",
+    "specific ต่อ myocardial ischemia / severe CAD",
+    "proximal LAD หรือ left main stenosis",
+    "acute severe LV overload",
+    "เป็น sign ที่ถูกมองข้ามบ่อย"
+  ]
+};
+
+const MEMORY_EXTRA = [
+  { criterion: "stemi", clue: "ST ↑ ใน II, III, aVF + ST ↓ ใน I, aVL = inferior territory" },
+  { criterion: "posterior", clue: "V1–V3 ST depression + tall R + upright T = posterior mirror" },
+  { criterion: "rv-infarct", clue: "inferior STEMI + hypotension + V4R ↑ = RV involvement" },
+  { criterion: "brugada", clue: "fever + coved STE V1–V2 + syncope = type 1 pattern" },
+  { criterion: "long-qt", clue: "QTc 520 + hypokalemia + ondansetron = TdP risk" },
+  { criterion: "lvh", clue: "S_V1 + R_V5 ≥ 35 mm + LV strain = voltage hypertrophy" },
+  { criterion: "rvh", clue: "V1 R ≥ 7 mm + RAD + RV strain = right ventricular hypertrophy" },
+  { criterion: "bifascicular", clue: "RBBB + LAFB + PR 220 ms = incomplete trifascicular" },
+  { criterion: "hyperkalemia-t", clue: "tall narrow T + wide QRS + absent P = severe potassium rise" },
+  { criterion: "wellens", clue: "post-anginal biphasic T V2–V3 = critical LAD" }
+];
+
+
+/* ============================================================
    ECG waveform engine — schematic traces for teaching only
    Time scale: 100 units / second. Voltage: configurable px / mV.
    ============================================================ */
@@ -5144,7 +5620,7 @@ const QUIZ = [
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
   const STORAGE_KEY = "ecg-field-guide-v1";
   const storeDefaults = {
-    mode: "quick", theme: "light", completed: [], lastLesson: null, quizBest: null
+    mode: "quick", theme: "light", completed: [], lastLesson: null, quizBest: null, memoryBest: null
   };
 
   function loadStore() {
@@ -5172,7 +5648,7 @@ const QUIZ = [
     currentLesson: null,
     visitedSteps: new Set(),
     axis: { I: "pos", aVF: "pos", II: "pos" },
-    quiz: { index: 0, score: 0, answered: false, done: false },
+    quiz: { mode: "memory", set: [], label: "", index: 0, score: 0, answered: false, chosen: null, done: false, wrong: [] },
     timer: { left: 60, running: false, over: false, id: null },
     palette: { query: "", selected: 0, results: [] },
     lab: { current: "nsr", revealed: false }
@@ -5895,13 +6371,21 @@ const QUIZ = [
       if (opt) { answerQuiz(Number(opt.dataset.quizOpt)); return; }
       const next = e.target.closest("[data-quiz-next]");
       if (next) { nextQuiz(); return; }
-      const restart = e.target.closest("[data-quiz-restart]");
-      if (restart) { startQuiz(); return; }
+      const memoryStart = e.target.closest("[data-memory-start]");
+      if (memoryStart) { startMemorySession(memoryStart.dataset.memoryStart); return; }
+      const memoryRestart = e.target.closest("[data-memory-restart]");
+      if (memoryRestart) { startMemorySession(memoryRestart.dataset.memoryRestart); return; }
+      const scenarioRestart = e.target.closest("[data-quiz-restart]");
+      if (scenarioRestart) { startScenarioQuiz(); return; }
+      const mode = e.target.closest("[data-quiz-mode]");
+      if (mode) { if (mode.dataset.quizMode === "scenario") startScenarioQuiz(); else renderMemoryIntro(); return; }
+      const openCriterion = e.target.closest("[data-memory-open]");
+      if (openCriterion) { closeQuizDialog(); openCriteria(openCriterion.dataset.memoryOpen); return; }
     });
     document.addEventListener("keydown", (e) => {
       const dlg = $("#quiz-dialog");
-      if (!dlg.open || state.quiz.done) return;
-      if (/^[1-4]$/.test(e.key)) { e.preventDefault(); answerQuiz(Number(e.key) - 1); }
+      if (!dlg.open || state.quiz.done || !state.quiz.set.length) return;
+      if (/^[1-5]$/.test(e.key)) { e.preventDefault(); answerQuiz(Number(e.key) - 1); }
       if (e.key === "Enter" && state.quiz.answered) { e.preventDefault(); nextQuiz(); }
     });
 
@@ -6044,33 +6528,193 @@ const QUIZ = [
   }
 
   /* ---------- quiz ---------- */
-  function openQuiz() {
+
+  function memoryTitle(id) {
+    const c = CRITERIA.find((x) => x.id === id);
+    return MEMORY_TITLES[id] || (c ? c.title : id);
+  }
+
+  function memoryLabel(id) {
+    return MEMORY_OPTION_LABELS[id] || memoryTitle(id);
+  }
+
+  function hashSeed(text) {
+    let h = 2166136261;
+    for (let i = 0; i < text.length; i++) {
+      h ^= text.charCodeAt(i);
+      h = Math.imul(h, 16777619);
+    }
+    return h >>> 0;
+  }
+
+  function seededShuffle(items, seed) {
+    const a = items.slice();
+    let s = seed >>> 0;
+    for (let i = a.length - 1; i > 0; i--) {
+      s = (Math.imul(s, 1664525) + 1013904223) >>> 0;
+      const j = s % (i + 1);
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function randomShuffle(items) {
+    const a = items.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function buildMemoryBank() {
+    const byId = new Map(CRITERIA.map((c) => [c.id, c]));
+    const allIds = Array.from(byId.keys());
+    const bank = [];
+
+    const addQuestion = (criterionId, clue, key) => {
+      const c = byId.get(criterionId);
+      if (!c) return;
+      const family = (MEMORY_POOL_OVERRIDES[criterionId] || MEMORY_POOLS[c.cat] || allIds).filter((id) => id !== criterionId && byId.has(id));
+      const pool = family.length >= 4 ? family : allIds.filter((id) => id !== criterionId);
+      const seed = hashSeed(criterionId + "|" + key + "|" + clue);
+      const distractors = seededShuffle(pool, seed).slice(0, 4);
+      const optionIds = seededShuffle([criterionId, ...distractors], seed ^ 0x9e3779b9);
+      const options = optionIds.map((id) => ({ id, label: memoryLabel(id) }));
+      bank.push({
+        id: c.id + "-" + key,
+        criterion: c.id,
+        cat: c.cat,
+        catLabel: CATS[c.cat].label,
+        clue,
+        options,
+        answer: options.findIndex((o) => o.id === c.id),
+        explain: memoryTitle(c.id) + ": " + c.th
+      });
+    };
+
+    Object.keys(MEMORY_CLUES).forEach((criterionId) => {
+      MEMORY_CLUES[criterionId].forEach((clue, index) => addQuestion(criterionId, clue, "q" + (index + 1)));
+    });
+    MEMORY_EXTRA.forEach((item, index) => addQuestion(item.criterion, item.clue, "x" + (index + 1)));
+    return bank;
+  }
+
+  const MEMORY_BANK = buildMemoryBank();
+
+  function setQuizTitle(text) {
+    const title = $("#quiz-title");
+    if (title) title.textContent = text;
+  }
+
+  function selectMemorySet(count) {
+    const byCriterion = new Map();
+    MEMORY_BANK.forEach((q) => {
+      if (!byCriterion.has(q.criterion)) byCriterion.set(q.criterion, []);
+      byCriterion.get(q.criterion).push(q);
+    });
+    const ids = randomShuffle(Array.from(byCriterion.keys()));
+    const pick = (id) => {
+      const list = byCriterion.get(id);
+      return list[Math.floor(Math.random() * list.length)];
+    };
+    if (count === "all") return randomShuffle(MEMORY_BANK.slice());
+    if (count === 39) return randomShuffle(ids.map(pick));
+    return randomShuffle(ids.slice(0, Math.min(20, ids.length)).map(pick));
+  }
+
+  function openQuiz(mode) {
     const dlg = $("#quiz-dialog");
     if (!dlg.open) dlg.showModal();
-    startQuiz();
+    if (mode === "scenario") startScenarioQuiz();
+    else renderMemoryIntro();
   }
+
   function closeQuizDialog() {
     const dlg = $("#quiz-dialog");
     if (dlg.open) dlg.close();
   }
-  function startQuiz() {
-    state.quiz = { index: 0, score: 0, answered: false, done: false };
-    renderQuizQuestion();
+
+  function renderMemoryIntro() {
+    const total = MEMORY_BANK.length;
+    const best = store.memoryBest;
+    const progress = $("#quiz-progress-bar");
+    if (progress) progress.style.width = "0%";
+    const mini = $("#quiz-score-mini");
+    if (mini) mini.textContent = total + " ข้อ";
+    setQuizTitle("Memory Drill");
+    $("#quiz-body").innerHTML = `
+      <div class="quiz-intro">
+        <div class="quiz-q-count">MEMORY DRILL · CRITERIA RECALL</div>
+        <h2 class="quiz-intro-title" tabindex="-1">ทบทวนเกณฑ์ ${total} ข้อ</h2>
+        <p class="quiz-intro-lead">ข้อสอบ 5 ตัวเลือกที่ออกแบบจากเกณฑ์จริงทั้ง ${CRITERIA.length} ข้อ — ทุกตัวเลือกเป็นเกณฑ์ที่อยู่ในกลุ่มเดียวกัน จึงต้องจำให้แม่นจริง ๆ ไม่ใช่เดาจากตัวเลือกที่ผิดชัดเจน</p>
+        <div class="quiz-stats">
+          <div><b>${CRITERIA.length}</b><span>เกณฑ์</span></div>
+          <div><b>${total}</b><span>ข้อสอบ</span></div>
+          <div><b>5</b><span>ตัวเลือก/ข้อ</span></div>
+        </div>
+        <div class="memory-start-grid">
+          <button class="memory-start" data-memory-start="20">
+            <span class="ms-kicker">QUICK SET</span>
+            <b>ชุดสั้น 20 ข้อ</b>
+            <span>สุ่มจาก 20 เกณฑ์ เหมาะกับทวนก่อนขึ้น ward</span>
+          </button>
+          <button class="memory-start" data-memory-start="39">
+            <span class="ms-kicker">FULL COVERAGE</span>
+            <b>ชุดครบ 39 เกณฑ์</b>
+            <span>หนึ่งข้อต่อหนึ่งเกณฑ์ ครอบคลุมทุกหัวข้อ</span>
+          </button>
+          <button class="memory-start memory-start-all" data-memory-start="all">
+            <span class="ms-kicker">MARATHON</span>
+            <b>ทั้งหมด ${total} ข้อ</b>
+            <span>ทำครบทุกเกณฑ์และทุกรูปแบบคำถาม</span>
+          </button>
+        </div>
+        <div class="quiz-intro-foot">
+          ${best ? `<span class="quiz-best">BEST · ${Math.round(best.pct * 100)}%</span>` : `<span class="quiz-best">ยังไม่มีคะแนน</span>`}
+          <button class="text-link" data-quiz-mode="scenario">ไปข้อสอบสถานการณ์ 10 ข้อ →</button>
+        </div>
+      </div>`;
+    const heading = $(".quiz-intro-title");
+    if (heading) heading.focus({ preventScroll: true });
+    $("#quiz-body").scrollTop = 0;
   }
-  function renderQuizQuestion() {
-    const q = QUIZ[state.quiz.index];
-    const total = QUIZ.length;
+
+  function startMemorySession(count) {
+    const size = count === "all" ? "all" : Number(count);
+    const set = selectMemorySet(size);
+    const label = size === "all" ? "ทั้งหมด " + set.length + " ข้อ" : size === 39 ? "ครบ 39 เกณฑ์" : "ชุด 20 ข้อ";
+    state.quiz = { mode: "memory", set, label, index: 0, score: 0, answered: false, chosen: null, done: false, wrong: [] };
+    setQuizTitle("Memory Drill");
+    renderMemoryQuestion();
+  }
+
+  function startScenarioQuiz() {
+    state.quiz = { mode: "scenario", set: QUIZ.slice(), label: "สถานการณ์ 10 ข้อ", index: 0, score: 0, answered: false, chosen: null, done: false, wrong: [] };
+    setQuizTitle("Scenario Drill");
+    renderScenarioQuestion();
+  }
+
+  function renderMemoryQuestion() {
+    if (!state.quiz.set.length) return renderMemoryIntro();
+    const q = state.quiz.set[state.quiz.index];
+    const total = state.quiz.set.length;
     const n = state.quiz.index + 1;
-    const prog = $("#quiz-progress-bar");
-    if (prog) prog.style.width = (n / total * 100) + "%";
+    const answered = state.quiz.answered;
+    const progress = $("#quiz-progress-bar");
+    if (progress) progress.style.width = (n / total * 100) + "%";
     const mini = $("#quiz-score-mini");
     if (mini) mini.textContent = state.quiz.score + " / " + total;
-    const body = $("#quiz-body");
-    const answered = state.quiz.answered;
-    body.innerHTML = `
-      <div class="quiz-q-count">QUESTION ${String(n).padStart(2, "0")} / ${String(total).padStart(2, "0")}</div>
-      <h2 class="quiz-q" id="quiz-question" tabindex="-1">${q.q}</h2>
-      <div class="quiz-scenario">${q.scenario}</div>
+    const answerLabel = q.options[q.answer].label;
+    const feedback = answered
+      ? (state.quiz.chosen === q.answer
+        ? `<b>ถูกต้อง</b> — ${escapeHTML(q.explain)}`
+        : `<b>คำตอบที่ถูกคือ ${String.fromCharCode(65 + q.answer)} · ${escapeHTML(answerLabel)}</b> — ${escapeHTML(q.explain)}`)
+      : "";
+    $("#quiz-body").innerHTML = `
+      <div class="quiz-q-count">MEMORY · ${String(n).padStart(3, "0")} / ${String(total).padStart(3, "0")} · ${escapeHTML(q.catLabel)}</div>
+      <h2 class="quiz-q" id="quiz-question" tabindex="-1">ข้อใดตรงกับลักษณะนี้?</h2>
+      <div class="quiz-scenario memory-clue">${escapeHTML(q.clue)}</div>
       <div class="quiz-options" role="group" aria-labelledby="quiz-question">
         ${q.options.map((opt, i) => {
           let cls = "";
@@ -6079,12 +6723,49 @@ const QUIZ = [
             else if (i === state.quiz.chosen) cls = " wrong";
           }
           return `<button class="quiz-option${cls}" data-quiz-opt="${i}" ${answered ? "disabled" : ""}>
-            <span class="letter">${String.fromCharCode(65 + i)}</span>${opt}
+            <span class="letter">${String.fromCharCode(65 + i)}</span><span class="option-text">${escapeHTML(opt.label)}</span>
+          </button>`;
+        }).join("")}
+      </div>
+      <div class="quiz-explain ${answered ? "show" : ""}">${feedback}</div>
+      ${answered ? `<div class="quiz-feedback-actions"><button class="text-link" data-memory-open="${q.criterion}">เปิดเกณฑ์เต็ม →</button></div>` : ""}
+      <div class="quiz-foot">
+        <span class="hint">${answered ? "กด Enter เพื่อไปข้อถัดไป" : "กด 1–5 หรือคลิกคำตอบ"}</span>
+        <button class="btn small ${answered ? "" : "ghost"}" data-quiz-next ${answered ? "" : "disabled"}>${n === total ? "ดูผลคะแนน" : "ข้อถัดไป"} <svg class="arrow"><use href="#i-arrow-r"/></svg></button>
+      </div>`;
+    const qEl = $("#quiz-question");
+    if (qEl) qEl.focus({ preventScroll: true });
+    $("#quiz-body").scrollTop = 0;
+  }
+
+  function renderScenarioQuestion() {
+    if (!state.quiz.set.length) return renderMemoryIntro();
+    const q = state.quiz.set[state.quiz.index];
+    const total = state.quiz.set.length;
+    const n = state.quiz.index + 1;
+    const answered = state.quiz.answered;
+    const progress = $("#quiz-progress-bar");
+    if (progress) progress.style.width = (n / total * 100) + "%";
+    const mini = $("#quiz-score-mini");
+    if (mini) mini.textContent = state.quiz.score + " / " + total;
+    $("#quiz-body").innerHTML = `
+      <div class="quiz-q-count">SCENARIO · ${String(n).padStart(2, "0")} / ${String(total).padStart(2, "0")}</div>
+      <h2 class="quiz-q" id="quiz-question" tabindex="-1">${escapeHTML(q.q)}</h2>
+      <div class="quiz-scenario">${escapeHTML(q.scenario)}</div>
+      <div class="quiz-options" role="group" aria-labelledby="quiz-question">
+        ${q.options.map((opt, i) => {
+          let cls = "";
+          if (answered) {
+            if (i === q.answer) cls = " correct";
+            else if (i === state.quiz.chosen) cls = " wrong";
+          }
+          return `<button class="quiz-option${cls}" data-quiz-opt="${i}" ${answered ? "disabled" : ""}>
+            <span class="letter">${String.fromCharCode(65 + i)}</span><span class="option-text">${escapeHTML(opt)}</span>
           </button>`;
         }).join("")}
       </div>
       <div class="quiz-explain ${answered ? "show" : ""}">
-        <b>${state.quiz.chosen === q.answer ? "ถูกต้อง" : "คำตอบที่ถูกคือ " + String.fromCharCode(65 + q.answer)}</b> — ${q.explain}
+        <b>${state.quiz.chosen === q.answer ? "ถูกต้อง" : "คำตอบที่ถูกคือ " + String.fromCharCode(65 + q.answer)}</b> — ${escapeHTML(q.explain)}
       </div>
       <div class="quiz-foot">
         <span class="hint">${answered ? "กด Enter เพื่อไปข้อถัดไป" : "กด 1–4 หรือคลิกคำตอบ"}</span>
@@ -6092,43 +6773,101 @@ const QUIZ = [
       </div>`;
     const qEl = $("#quiz-question");
     if (qEl) qEl.focus({ preventScroll: true });
-    body.scrollTop = 0;
+    $("#quiz-body").scrollTop = 0;
   }
+
+  function renderCurrentQuestion() {
+    if (state.quiz.mode === "memory") renderMemoryQuestion();
+    else renderScenarioQuestion();
+  }
+
   function answerQuiz(i) {
-    if (state.quiz.answered || state.quiz.done) return;
-    const q = QUIZ[state.quiz.index];
-    if (i < 0 || i >= q.options.length) return;
+    if (state.quiz.answered || state.quiz.done || !state.quiz.set.length) return;
+    const q = state.quiz.set[state.quiz.index];
+    if (!q || i < 0 || i >= q.options.length) return;
     state.quiz.answered = true;
     state.quiz.chosen = i;
     if (i === q.answer) state.quiz.score += 1;
-    renderQuizQuestion();
+    else if (state.quiz.mode === "memory") state.quiz.wrong.push(q.criterion);
+    renderCurrentQuestion();
   }
+
   function nextQuiz() {
     if (!state.quiz.answered) return;
-    if (state.quiz.index + 1 >= QUIZ.length) {
+    if (state.quiz.index + 1 >= state.quiz.set.length) {
       state.quiz.done = true;
-      renderQuizResult();
+      if (state.quiz.mode === "memory") renderMemoryResult();
+      else renderScenarioResult();
       return;
     }
     state.quiz.index += 1;
     state.quiz.answered = false;
     state.quiz.chosen = null;
-    renderQuizQuestion();
+    renderCurrentQuestion();
   }
-  function renderQuizResult() {
+
+  function renderMemoryResult() {
     const score = state.quiz.score;
-    const total = QUIZ.length;
-    const pct = score / total;
+    const total = state.quiz.set.length;
+    const pct = total ? score / total : 0;
     const ring = 2 * Math.PI * 50;
-    const best = store.quizBest;
-    if (best == null || score > best) { store.quizBest = score; saveStore(); }
+    const previousBest = store.memoryBest;
+    if (!previousBest || pct > previousBest.pct) {
+      store.memoryBest = { pct, score, total };
+      saveStore();
+    }
+    const best = store.memoryBest;
+    const wrongIds = Array.from(new Set(state.quiz.wrong));
+    let title = "เริ่มต้นได้ดี";
+    let msg = "ทบทวนเกณฑ์ที่พลาด แล้วลองชุดใหม่อีกครั้ง — การจำเกณฑ์ต้องใช้การทำซ้ำ";
+    if (pct >= 0.9) { title = "แม่นมาก"; msg = "คะแนนระดับพร้อมใช้หน้าเตียง — ลองทำชุดทั้งหมดหรือจับเวลา 60 วินาทีกับ ECG จริง"; }
+    else if (pct >= 0.7) { title = "พื้นฐานแน่นแล้ว"; msg = "เหลือจุดที่พลาดไม่มาก เปิดเกณฑ์ที่พลาดด้านล่างแล้วลองใหม่"; }
+    else if (pct >= 0.5) { title = "กำลังไปได้"; msg = "ทบทวนเกณฑ์ที่พลาดและลองชุด 39 เกณฑ์อีกครั้ง"; }
+    const progress = $("#quiz-progress-bar");
+    if (progress) progress.style.width = "100%";
+    const mini = $("#quiz-score-mini");
+    if (mini) mini.textContent = score + " / " + total;
+    const wrongChips = wrongIds.length
+      ? `<div class="memory-wrong"><div class="quiz-q-count">ทบทวนจุดที่พลาด</div><div class="memory-wrong-chips">${wrongIds.map((id) => `<button class="chip" data-memory-open="${id}">${escapeHTML(memoryLabel(id))}</button>`).join("")}</div></div>`
+      : `<div class="memory-wrong is-perfect"><div class="quiz-q-count">ไม่พลาดข้อใดเลย</div><p>ลองเพิ่มความเร็วหรือทำชุดทั้งหมด ${MEMORY_BANK.length} ข้อ</p></div>`;
+    $("#quiz-body").innerHTML = `
+      <div class="quiz-result">
+        <div class="score-ring">
+          <svg viewBox="0 0 120 120" width="120" height="120">
+            <circle cx="60" cy="60" r="50" fill="none" stroke="var(--line)" stroke-width="5"/>
+            <circle cx="60" cy="60" r="50" fill="none" stroke="var(--green)" stroke-width="5" stroke-linecap="round" stroke-dasharray="${ring}" stroke-dashoffset="${ring * (1 - pct)}"/>
+          </svg>
+          <b>${score}/${total}</b>
+        </div>
+        <h2>${title}</h2>
+        <p>${msg}</p>
+        <p style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:var(--faint);margin-top:14px">BEST · ${Math.round(best.pct * 100)}% (${best.score}/${best.total})</p>
+        ${wrongChips}
+        <div class="memory-result-actions">
+          <button class="btn primary" data-memory-restart="20">ชุดใหม่อีก 20 ข้อ <svg class="arrow"><use href="#i-reset"/></svg></button>
+          <button class="btn" data-memory-restart="all">ทำทั้งหมด ${MEMORY_BANK.length} ข้อ</button>
+          <button class="btn" data-quiz-mode="scenario">ข้อสอบสถานการณ์</button>
+          <button class="btn" data-close-quiz>ปิด</button>
+        </div>
+      </div>`;
+    const heading = $(".quiz-result h2");
+    if (heading) { heading.setAttribute("tabindex", "-1"); heading.focus({ preventScroll: true }); }
+  }
+
+  function renderScenarioResult() {
+    const score = state.quiz.score;
+    const total = state.quiz.set.length;
+    const pct = total ? score / total : 0;
+    const ring = 2 * Math.PI * 50;
+    const previousBest = store.quizBest;
+    if (previousBest == null || score > previousBest) { store.quizBest = score; saveStore(); }
     let title = "เริ่มต้นได้ดี";
     let msg = "ทบทวนเกณฑ์ที่พลาด แล้วลองอีกครั้ง — การอ่าน ECG เก่งขึ้นด้วยการทำซ้ำ";
     if (pct >= 0.9) { title = "แม่นมาก"; msg = "คะแนนระดับพร้อมใช้หน้าเตียง — ลองฝึกกับ ECG จริงและจับเวลา 60 วินาที"; }
     else if (pct >= 0.7) { title = "พื้นฐานแน่นแล้ว"; msg = "เหลือจุดที่พลาดไม่มาก กลับไปเปิดเกณฑ์ใน Quick Review แล้วลองใหม่"; }
     else if (pct >= 0.5) { title = "กำลังไปได้"; msg = "ทบทวน 7 ขั้นตอนและ red flags อีกครั้ง แล้วลองทำใหม่"; }
-    const prog = $("#quiz-progress-bar");
-    if (prog) prog.style.width = "100%";
+    const progress = $("#quiz-progress-bar");
+    if (progress) progress.style.width = "100%";
     const mini = $("#quiz-score-mini");
     if (mini) mini.textContent = score + " / " + total;
     $("#quiz-body").innerHTML = `
@@ -6143,14 +6882,15 @@ const QUIZ = [
         <h2>${title}</h2>
         <p>${msg}</p>
         <p style="font-family:var(--mono);font-size:9px;letter-spacing:.08em;color:var(--faint);margin-top:14px">BEST · ${store.quizBest}/${total}</p>
-        <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+        <div class="memory-result-actions">
           <button class="btn primary" data-quiz-restart>ทำอีกครั้ง <svg class="arrow"><use href="#i-reset"/></svg></button>
+          <button class="btn" data-quiz-mode="memory">กลับไปทบทวนเกณฑ์</button>
           <button class="btn" data-close-quiz>ปิด</button>
           <button class="btn" data-go-quick-after-quiz>เปิด Quick Review</button>
         </div>
       </div>`;
-    const qEl = $(".quiz-result h2");
-    if (qEl) { qEl.setAttribute("tabindex", "-1"); qEl.focus({ preventScroll: true }); }
+    const heading = $(".quiz-result h2");
+    if (heading) { heading.setAttribute("tabindex", "-1"); heading.focus({ preventScroll: true }); }
     $("[data-go-quick-after-quiz]").addEventListener("click", () => {
       closeQuizDialog();
       setMode("quick", { scroll: true });
