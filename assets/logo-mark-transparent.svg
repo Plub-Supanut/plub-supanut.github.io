@@ -1,5 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="Plub logo">
-  <path d="M22 54V14" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
-  <path d="M22 18h11a10 10 0 0 1 0 20H22" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="47" cy="14" r="4.2" fill="#8B1E31"/>
+  <g transform="rotate(-7 32 32)">
+    <path d="M22 52V14" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+    <path d="M22 18h10a10 10 0 0 1 0 20H22" stroke="#8B1E31" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
 </svg>
