@@ -40,7 +40,7 @@
 - **ลิงก์หลักชี้หน้าเว็บผลลัพธ์เสมอ** — ถ้า repo มีเว็บที่เปิดได้ การคลิกแถวคือเปิดเว็บจริง
 - **GitHub เป็นลิงก์รองที่ติดป้าย** — มีป้าย "GitHub ↗" แยกชัดเจน ไม่แอบพาไป GitHub แทนเว็บ
 - **repo ที่ไม่มีเว็บ** — แถวยังพาไป GitHub ได้ แต่ป้ายท้ายแถวจะเขียนว่า "GitHub" ไม่ใช่ "เปิดเว็บ"
-- **ลำดับการหาลิงก์** — `homepage` ของ repo → Pages API (`/repos/{owner}/{repo}/pages` → `html_url`) → `html_url` ของ GitHub; ผลจาก Pages API ถูก cache ใน `sessionStorage` ต่อ session
+- **ลำดับการหาลิงก์** — `homepage` ของ repo → Pages API (`/repos/{owner}/{repo}/pages` → `html_url`) → URL มาตรฐาน `https://<owner>.github.io/<repo>/` เมื่อ `has_pages` เป็น true (เพราะ Pages API ตอบ 404 ให้ request ที่ไม่ได้ล็อกอิน) → `html_url` ของ GitHub; ผลลัพธ์ถูก cache ใน `sessionStorage` ต่อ session
 - **ลิงก์ภายนอก** — เปิดแท็บใหม่ด้วย `target="_blank" rel="noopener noreferrer"` และมี focus ring ให้เห็นชัดเมื่อใช้คีย์บอร์ด
 
 ### Link guard

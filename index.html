@@ -247,7 +247,7 @@ header,main,footer{position:relative;z-index:1}
   var q = document.getElementById('q');
   var all = [];
   var OWNER = 'Plub-Supanut';
-  var PAGES_CACHE = 'plub.pages.';
+  var PAGES_CACHE = 'plub.pages.v2.';
 
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
@@ -264,9 +264,10 @@ header,main,footer{position:relative;z-index:1}
     return d.toLocaleDateString('th-TH', { day: 'numeric', month: 'short', year: '2-digit' });
   }
 
-  /* Link resolution: repo.homepage -> Pages API html_url -> GitHub.
-     Probes run only for repos without a homepage and are cached per session,
-     so a reload does not re-query. A failed probe never breaks rendering. */
+  /* Link resolution: repo.homepage -> Pages API html_url -> derived project
+     site URL (when has_pages) -> GitHub. Probes run only for repos without a
+     homepage and are cached per session, so a reload does not re-query.
+     A failed probe never breaks rendering. */
   function cachedPages(name) {
     try { return sessionStorage.getItem(PAGES_CACHE + name); } catch (e) { return null; }
   }
@@ -282,6 +283,11 @@ header,main,footer{position:relative;z-index:1}
       return res.json().then(function (data) { return (data && data.html_url) || ''; });
     }).catch(function () { return null; });
   }
+  function pagesUrl(name) {
+    var host = OWNER.toLowerCase();
+    if (name.toLowerCase() === host + '.github.io') return 'https://' + host + '.github.io/';
+    return 'https://' + host + '.github.io/' + name + '/';
+  }
   function resolveLink(r) {
     var home = String(r.homepage || '').trim();
     if (home) return Promise.resolve({ href: home, live: true });
@@ -289,8 +295,19 @@ header,main,footer{position:relative;z-index:1}
     if (cached !== null) {
       return Promise.resolve(cached ? { href: cached, live: true } : { href: r.html_url, live: false });
     }
+    if (r.has_pages === false) {
+      rememberPages(r.name, '');
+      return Promise.resolve({ href: r.html_url, live: false });
+    }
     return probePages(r.name).then(function (url) {
       if (url) { rememberPages(r.name, url); return { href: url, live: true }; }
+      // The Pages API 404s without auth, so fall back to the standard project
+      // site URL whenever GitHub says this repo has Pages enabled.
+      if (r.has_pages === true) {
+        var derived = pagesUrl(r.name);
+        rememberPages(r.name, derived);
+        return { href: derived, live: true };
+      }
       if (url === '') rememberPages(r.name, '');
       return { href: r.html_url, live: false };
     });
