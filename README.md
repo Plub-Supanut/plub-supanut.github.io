@@ -20,19 +20,38 @@
 
 ## Overview
 
-หน้าแรกส่วนตัวของ **Plub** — รวมลิงก์ที่เปิดบ่อย (ECG Field Guide, Elective Guide, ER & Trauma) และรายการ repo จาก GitHub ไว้หน้าเดียว
+หน้าแรกส่วนตัวของ **Plub** — รวมลิงก์ที่เปิดบ่อย (ECG Field Guide, Elective Guide, ER & Trauma, MT5 AI Performance) และรายการ repo จาก GitHub ไว้หน้าเดียว
 
 ตัวหน้าเว็บเป็น static ล้วน ไม่มี build step, ไม่มี dependency และไม่เก็บข้อมูลผู้ใช้ — เปิดจากมือถือหรือคอมได้ทันที
 
 ## Features
 
-- **ลิงก์ที่ใช้บ่อย** — การ์ด 3 ใบ เปิดเว็บได้ตรง ไม่ต้องจำ URL
+- **ลิงก์ที่ใช้บ่อย** — การ์ด 4 ใบ เปิดเว็บได้ตรง ไม่ต้องจำ URL
 - **repo ล่าสุด** — ดึงจาก GitHub API ทุกครั้งที่เปิดหน้า กรอง fork/archived ออก
+- **ลิงก์ชี้หน้าเว็บจริง** — repo ที่มี Pages จะพาไปหน้าเว็บผลลัพธ์ และมีลิงก์ "GitHub ↗" แยกไว้ให้ชัดเจน (ดูกติกาด้านล่าง)
 - **ค้นหา repo** — พิมพ์ชื่อหรือคำอธิบายเพื่อกรองได้ทันที
 - **อัปเดตล่าสุด** — แสดง 3 repo ที่เพิ่งอัปเดต ในแผงด้านขวา
 - **เบาและเร็ว** — ไฟล์ HTML เดียว + assets ไม่มี framework
 - **พื้นหลัง dynamic** — orbs เคลื่อนไหวช้า ๆ และขยับตามเมาส์ (หยุดอัตโนมัติเมื่อระบบตั้งค่า reduced motion)
 - **รองรับ dark mode** — ตามการตั้งค่าระบบ
+
+## กติกาลิงก์ (Links)
+
+- **ลิงก์หลักชี้หน้าเว็บผลลัพธ์เสมอ** — ถ้า repo มีเว็บที่เปิดได้ การคลิกแถวคือเปิดเว็บจริง
+- **GitHub เป็นลิงก์รองที่ติดป้าย** — มีป้าย "GitHub ↗" แยกชัดเจน ไม่แอบพาไป GitHub แทนเว็บ
+- **repo ที่ไม่มีเว็บ** — แถวยังพาไป GitHub ได้ แต่ป้ายท้ายแถวจะเขียนว่า "GitHub" ไม่ใช่ "เปิดเว็บ"
+- **ลำดับการหาลิงก์** — `homepage` ของ repo → Pages API (`/repos/{owner}/{repo}/pages` → `html_url`) → `html_url` ของ GitHub; ผลจาก Pages API ถูก cache ใน `sessionStorage` ต่อ session
+- **ลิงก์ภายนอก** — เปิดแท็บใหม่ด้วย `target="_blank" rel="noopener noreferrer"` และมี focus ring ให้เห็นชัดเมื่อใช้คีย์บอร์ด
+
+### Link guard
+
+workflow [`link-guard.yml`](.github/workflows/link-guard.yml) รันทุก push บน `main`, ทุกวันตาม cron และสั่งมือผ่าน `workflow_dispatch` โดยใช้ [`link-guard.sh`](.github/scripts/link-guard.sh) (bash + curl + jq):
+
+- ไล่ทุก repo สาธารณะที่ไม่ใช่ fork และไม่ใช่ archived
+- repo ที่เปิด Pages ต้องมี `homepage` เป็น URL `https://` ที่ตรงกับ Pages URL (เทียบโดยไม่คิด `/` ท้าย)
+- ต้องเรียก URL นั้นแล้วได้ HTTP 200 (มี retry สำหรับ Pages ที่เพิ่ง deploy)
+- ถ้าไม่ผ่าน จะฟ้องเป็นบรรทัดเดียว ระบุชื่อ repo, ค่าที่ควรเป็น และคำสั่งแก้ เช่น `gh repo edit Plub-Supanut/<repo> --homepage <url>`
+
 
 ## Screenshot
 
@@ -47,6 +66,9 @@ assets/         รูป preview
 404.html        หน้า not found
 robots.txt      robots
 .nojekyll       ปิด Jekyll บน GitHub Pages
+.github/workflows/pages.yml        deploy ขึ้น GitHub Pages
+.github/workflows/link-guard.yml   ตรวจ homepage ของ repo ที่เปิด Pages
+.github/scripts/link-guard.sh      ตัวตรวจ (bash + curl + jq)
 README.md       ไฟล์นี้
 ```
 
